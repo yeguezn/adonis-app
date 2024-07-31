@@ -1,6 +1,7 @@
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import Category from './Category'
 import Meassure from './Meassure'
+import Sale from './Sale'
 
 export default class Product extends BaseModel {
   @column({ isPrimary: true })
@@ -23,5 +24,8 @@ export default class Product extends BaseModel {
 
   @belongsTo(()=> Meassure)
   public meassure: BelongsTo<typeof Meassure>
+
+  @hasMany(()=> Sale)
+  public sales:HasMany<typeof Sale>
 
 }

@@ -23,3 +23,7 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.get('/', async () => {
   return { hello: 'world' }
 })
+
+Route.resource("products", "ProductsController").apiOnly()
+Route.resource("categories", "CategoriesController").apiOnly()
+Route.resource("meassures", "MeassuresController").apiOnly()

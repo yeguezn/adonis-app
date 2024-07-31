@@ -1,5 +1,6 @@
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
+import Sale from './Sale'
 
 export default class Person extends BaseModel {
   @column({ isPrimary: true })
@@ -16,4 +17,8 @@ export default class Person extends BaseModel {
 
   @column.date()
   public birthday: DateTime
+
+  @hasMany(()=>Sale)
+  public sales:HasMany<typeof Sale>
+
 }
