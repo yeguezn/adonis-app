@@ -19,6 +19,12 @@ export default class Product extends BaseModel {
   @column()
   public stock: number
 
+  @column()
+  public category_id:number
+
+  @column()
+  public meassure_id:number
+
   @belongsTo(()=> Category)
   public category: BelongsTo<typeof Category>
 
