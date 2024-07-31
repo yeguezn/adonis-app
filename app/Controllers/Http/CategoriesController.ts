@@ -24,11 +24,11 @@ export default class CategoriesController {
     }
 
     public async update({request, response}){
-        const category = await Category.findOrFail(request.params("id"))
+        const category = await Category.findOrFail(request.param("id"))
 
         if (category) {
             category.name = request.body().name
-            category.save()
+            await category.save()
         }
 
         response.send(category)
@@ -36,7 +36,7 @@ export default class CategoriesController {
     }
 
     public async destroy({request, response}){
-        const category = await Category.findOrFail(request.params("id"))
+        const category = await Category.findOrFail(request.param("id"))
         await category.delete()
         response.send(category)
     }
