@@ -20,12 +20,14 @@ export default class Product extends BaseModel {
   public stock: number
 
   @column()
-  public category_id:number
-
+  public category_id: number
+  
   @column()
-  public meassure_id:number
+  public meassure_id: number
 
-  @belongsTo(()=> Category)
+  @belongsTo(()=> Category, {
+    foreignKey:"category_id"
+  })
   public category: BelongsTo<typeof Category>
 
   @belongsTo(()=> Meassure)

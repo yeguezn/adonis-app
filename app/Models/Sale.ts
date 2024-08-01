@@ -16,9 +16,6 @@ export default class Sale extends BaseModel {
   @column()
   public operation_number:string
 
-  @column()
-  public person_bank:string
-
   @belongsTo(()=>Bank)
-  public bank_id: BelongsTo<typeof Bank>
+  public bank: BelongsTo<typeof Bank>
 }

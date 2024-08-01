@@ -11,6 +11,8 @@ export default class Meassure extends BaseModel {
   @column()
   public symbol: string
 
-  @hasMany(()=> Product)
+  @hasMany(()=> Product, {
+    foreignKey:"meassure_id"
+  })
   public products: HasMany<typeof Product>
 }

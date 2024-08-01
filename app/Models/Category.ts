@@ -8,6 +8,8 @@ export default class Category extends BaseModel {
   @column()
   public name: string
 
-  @hasMany(()=> Product)
+  @hasMany(()=> Product, {
+    foreignKey: 'category_id'
+  })
   public products: HasMany<typeof Product>
 }
