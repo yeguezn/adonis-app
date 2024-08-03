@@ -1,4 +1,4 @@
-import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Category from './Category'
 import Meassure from './Meassure'
 import Sale from './Sale'
@@ -19,10 +19,10 @@ export default class Product extends BaseModel {
   @column()
   public stock: number
 
-  @column()
+  @column({serializeAs:null})
   public category_id: number
-  
-  @column()
+
+  @column({serializeAs:null})
   public meassure_id: number
 
   @belongsTo(()=> Category, {
@@ -30,10 +30,12 @@ export default class Product extends BaseModel {
   })
   public category: BelongsTo<typeof Category>
 
-  @belongsTo(()=> Meassure)
+  @belongsTo(()=> Meassure, {
+    foreignKey:"meassure_id"
+  })
   public meassure: BelongsTo<typeof Meassure>
 
-  @hasMany(()=> Sale)
-  public sales:HasMany<typeof Sale>
+  @manyToMany(()=> Sale)
+  public products: ManyToMany<typeof Sale>
 
 }

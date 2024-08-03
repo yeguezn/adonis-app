@@ -18,4 +18,6 @@ export default class Sale extends BaseModel {
 
   @belongsTo(()=>Bank)
   public bank: BelongsTo<typeof Bank>
+
 }
+
