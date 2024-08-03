@@ -28,10 +28,15 @@ export default class CreateProductValidator {
       rules.minLength(5),
       rules.maxLength(5)
     ]),
+    
     name:schema.string(),
+    
     stock:schema.number([
       rules.unsigned(),
       rules.range(1, 100000)
+    ]),
+    price:schema.number([
+      rules.unsigned()
     ]),
     category:schema.number([
       rules.unsigned(),
