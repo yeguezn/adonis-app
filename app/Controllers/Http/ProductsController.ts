@@ -19,7 +19,7 @@ export default class ProductsController {
         response.send(product)
     }
 
-    public async store({request, response}){
+    public async store({request, response}:HttpContextContract){
        
       const newProduct = new Product()
 
