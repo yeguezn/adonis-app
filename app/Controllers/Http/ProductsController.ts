@@ -1,5 +1,8 @@
 import  { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Product from "App/Models/Product";
+import CreateProductValidator from 'App/Validators/CreateProductValidator';
+import ProductValidator from 'App/Validators/ProductValidator';
+import UpdateProductValidator from 'App/Validators/UpdateProductValidator';
 
 export default class ProductsController {
     public async index({response}: HttpContextContract){
@@ -10,50 +13,55 @@ export default class ProductsController {
 
     public async show({request, response}){
 
-        const product = await Product.find(request.param("id"))
+        const payload = await request.validate(ProductValidator)
+
+        const product = await Product.find(payload.params.id)
 
         await product?.load("category")
         await product?.load("meassure")
         
 
-        response.send(product)
+        response.ok(product)
     }
 
     public async store({request, response}:HttpContextContract){
-       
-      const newProduct = new Product()
+      const payload = await request.validate(CreateProductValidator)
 
-      newProduct.code = request.body().code
-      newProduct.name = request.body().name
-      newProduct.stock = request.body().stock
-      newProduct.price = request.body().price
-      newProduct.category_id = request.body().category
-      newProduct.meassure_id = request.body().meassure
+      const newProduct = await Product.create({
+
+        code:payload.code,
+        name:payload.name,
+        stock:payload.stock,
+        price:payload.price,
+        category_id:payload.category,
+        meassure_id:payload.meassure
+
+      })
       
 
-      response.send(newProduct)
+      response.ok(newProduct)
     }
 
     public async update({request, response}){
-        const product = await Product.findOrFail(request.param("id"))
+        const payload = await request.validate(UpdateProductValidator)
+        const product = await Product.findOrFail(payload.params.id)
 
-        if (product) {
-            product.name = request.body().name
-            product.code = request.body().code
-            product.price = request.body().price
-            product.stock = request.body().stock
-            product.category_id = request.body().category
-            product.meassure_id = request.body().meassure
-            await product.save()
-        }
+        product.name = payload.name
+        product.code = payload.code
+        product.price = payload.price
+        product.stock = payload.stock
+        product.category_id = payload.category
+        product.meassure_id = payload.meassure
+        await product.save()
 
-        response.send(product)
+        response.ok(product)
 
     }
 
     public async destroy({request, response}){
-        const product = await Product.findOrFail(request.param("id"))
+        const payload = await request.validate(ProductValidator)
+        const product = await Product.findOrFail(payload.params.id)
         await product.delete()
-        response.send(product)
+        response.ok(product)
     }
 }

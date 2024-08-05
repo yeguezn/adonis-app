@@ -19,12 +19,14 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import UnitConversionService from 'App/Service/UnitConversionService'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
+Route.post("/", ({request})=>{
+  const result = UnitConversionService.unitConvertion(request.body().meassureUnitSymbol, request.body().meassureUnitSymbolToConvert, request.body().meassureValue)
+  console.log(result)
 })
 
 Route.resource("products", "ProductsController").apiOnly()
 Route.resource("categories", "CategoriesController").apiOnly()
-Route.resource("meassures", "MeassuresController").apiOnly()
+Route.resource("meassures", "MeassuresController").only(["index", "show"])
 Route.resource("people", "PeopleController").apiOnly()
