@@ -1,4 +1,4 @@
-import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Category from './Category'
 import Meassure from './Meassure'
 import Sale from './Sale'
@@ -35,7 +35,13 @@ export default class Product extends BaseModel {
   })
   public meassure: BelongsTo<typeof Meassure>
 
-  @manyToMany(()=> Sale)
+  @manyToMany(()=> Sale,{
+    localKey:"id",
+    relatedKey:"id",
+    pivotForeignKey:"product_id",
+    pivotTable:"sale_details",
+    pivotColumns:["quantity"]
+  })
   public products: ManyToMany<typeof Sale>
 
 }

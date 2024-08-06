@@ -1,24 +1,20 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'products'
+  protected tableName = 'sale_details'
 
   public async up () {
-
     this.schema.alterTable(this.tableName, (table)=>{
-      table.integer("meassure_id").unsigned().references("id").inTable("meassures")
-      .onDelete("CASCADE").notNullable()
+
+      table.integer("currency_id").unsigned().references("currencies.id")
+      
+
     })
-   
   }
 
   public async down () {
-
     this.schema.alterTable(this.tableName, (table)=>{
-
-      table.dropColumn("meassure_id")
-
+      table.dropColumn("currency_id")
     })
-   
   }
 }
