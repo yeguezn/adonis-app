@@ -1,5 +1,4 @@
-import { BaseModel, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
-import Sale from './Sale'
+import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Currency extends BaseModel {
   @column({ isPrimary: true })
@@ -12,15 +11,5 @@ export default class Currency extends BaseModel {
   public currentValue: number
 
   @column()
-  public symbol: string
-
-  @manyToMany(()=>Sale, {
-    localKey:"id",
-    relatedKey:"id",
-    pivotForeignKey:"currency_id",
-    pivotTable:"sale_details"
-  })
-  public sales: ManyToMany<typeof Sale>
-
-  
+  public symbol: string 
 }

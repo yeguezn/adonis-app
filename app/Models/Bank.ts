@@ -8,6 +8,9 @@ export default class Bank extends BaseModel {
   @column()
   public name: string
 
+  @column()
+  public account_number: string
+
   @hasMany(()=> Sale)
   public sales: HasMany<typeof Sale>
 }
