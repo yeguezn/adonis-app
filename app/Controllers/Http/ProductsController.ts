@@ -64,4 +64,14 @@ export default class ProductsController {
         await product.delete()
         response.ok(product)
     }
+
+    public async filterProductsByCategory({request, response}:HttpContextContract){
+        const payload = await request.validate(ProductValidator)
+        const products = await Product.query().whereHas("category", (query)=>{
+            query.where("id", payload.params.id)
+        })
+
+        response.ok(products)
+        
+    }
 }
