@@ -2,6 +2,7 @@ import  { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Product from "App/Models/Product";
 import CreateProductValidator from 'App/Validators/CreateProductValidator';
 import ProductValidator from 'App/Validators/ProductValidator';
+import CategoryValidator from 'App/Validators/CategoryValidator';
 import UpdateProductValidator from 'App/Validators/UpdateProductValidator';
 
 export default class ProductsController {
@@ -66,7 +67,7 @@ export default class ProductsController {
     }
 
     public async filterProductsByCategory({request, response}:HttpContextContract){
-        const payload = await request.validate(ProductValidator)
+        const payload = await request.validate(CategoryValidator)
         const products = await Product.query().whereHas("category", (query)=>{
             query.where("id", payload.params.id)
         })

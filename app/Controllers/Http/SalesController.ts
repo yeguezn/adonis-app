@@ -12,22 +12,24 @@ export default class SalesController {
         await product?.load("meassure")
 
         if (product) {
-            const quantityDetail = UnitConversionService.unitConvertion(request.body().meassure, product.meassure.symbol, request.body().quantity)
+
+            const quantityDetail = UnitConversionService.unitConvertion(payload.meassure, product.meassure.symbol, payload.quantity)
 
             const newSale = await Sale.create({
-                operation_number:request.body().operationNumber,
-                bank_id:request.body().personBank,
-                person_id:request.body().person
+                operation_number:payload.operation_number,
+                person_bank:payload.person_bank,
+                person_id:payload.person,
+                bank_id:payload.receptor_bank
             })
     
             const newSaleDetail = await SaleDetail.create({
+                
                 sale_id:newSale.id,
                 product_id:product?.id,
                 product_quantity:quantityDetail
     
             })
-
+            
         }
-        
     }
 }

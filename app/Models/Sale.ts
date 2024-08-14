@@ -15,6 +15,9 @@ export default class Sale extends BaseModel {
   public person_id: number
 
   @column()
+  public person_bank:string
+
+  @column()
   public bank_id: number
 
   @column()

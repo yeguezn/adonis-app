@@ -26,4 +26,7 @@ Route.resource("meassures", "MeassuresController").only(["index", "show"])
 Route.resource("people", "PeopleController").apiOnly()
 Route.resource("banks", "BanksController").apiOnly()
 Route.resource("currencies", "CurrenciesController").apiOnly()
+
+
 Route.post("sales", "SalesController.finishSale")
+Route.get("/productsByCategory/:id", "ProductsController.filterProductsByCategory")

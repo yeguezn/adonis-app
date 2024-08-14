@@ -2,23 +2,25 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Person from "App/Models/Person"
 import CreatePersonValidator from 'App/Validators/CreatePersonValidator'
 import UpdatePersonValidator from 'App/Validators/UpdatePersonValidator'
+import PersonValidator from 'App/Validators/PersonValidator'
 
 export default class PeopleController {
     public async index({response}:HttpContextContract){
-        const people = await Person.all()
+        let people = await Person.all()
         response.ok(people)
     }
 
     public async show({request, response}:HttpContextContract){
-        const person = await Person.find(request.param("id"))
+        let payload = await request.validate(PersonValidator)
+        let person = await Person.find(payload.params.id)
 
         response.ok(person)
     }
 
     public async store({request, response}:HttpContextContract){
-      const payload = await request.validate(CreatePersonValidator)
+      let payload = await request.validate(CreatePersonValidator)
 
-      const newPerson = await Person.create({
+      let newPerson = await Person.create({
         name:payload.name,
         identity_document:payload.identity_document,
         email:payload.email,
@@ -31,12 +33,12 @@ export default class PeopleController {
 
     public async update({request, response}:HttpContextContract){
 
-        const payload = await request.validate(UpdatePersonValidator)
-        const person = await Person.findOrFail(payload.params.id)
+        let payload = await request.validate(UpdatePersonValidator)
+        let person = await Person.findOrFail(payload.params.id)
 
-        person.name = payload.name,
-        person.identity_document=payload.identity_document,
-        person.email=payload.email,
+        person.name = payload.name
+        person.identity_document=payload.identity_document
+        person.email=payload.email
         person.birthday=payload.birthday
 
         await person.save()
@@ -45,7 +47,8 @@ export default class PeopleController {
     }
 
     public async destroy({request, response}:HttpContextContract){
-        const person = await Person.findOrFail(request.param("id"))
+        let payload = await request.validate(PersonValidator)
+        let person = await Person.findOrFail(payload.params.id)
         await person.delete()
         response.ok(person)
     }

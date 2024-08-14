@@ -5,14 +5,14 @@ import MeassureValidator from "App/Validators/MeassureValidator"
 
 export default class MeassuresController {
     public async index({response}){
-        const meassures = await Meassure.all()
+        let meassures = await Meassure.all()
 
         response.ok(meassures)
     }
 
     public async show({request, response}){
-        const payload = await request.validate(MeassureValidator)
-        const meassure = await Meassure.find(payload.params.id)
+        let payload = await request.validate(MeassureValidator)
+        let meassure = await Meassure.find(payload.params.id)
 
         response.ok(meassure)
     }
