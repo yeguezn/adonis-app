@@ -20,4 +20,10 @@ export default class SaleDetail extends BaseModel {
 
   @column()
   public product_quantity: number
+
+  @column()
+  public subtotal: number
+
+  @column()
+  public currency_symbol: string
 }

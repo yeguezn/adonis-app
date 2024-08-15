@@ -1,0 +1,99 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Categories",
+    "collectionId": "5b18a6fe-2609-4ca9-90ff-0180acb44ce1",
+    "dateExported": "2024-08-15T20:19:19.646Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "50e28066-07d1-4c58-be44-b601d2c27c3b",
+            "colId": "5b18a6fe-2609-4ca9-90ff-0180acb44ce1",
+            "containerId": "",
+            "name": "Create category",
+            "url": "localhost:3333/categories/19",
+            "method": "PUT",
+            "sortNum": 10000,
+            "created": "2024-07-31T18:33:23.705Z",
+            "modified": "2024-08-02T15:12:01.638Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Jardinería"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "3be21552-143e-4537-b9b6-3e6e430cb78d",
+            "colId": "5b18a6fe-2609-4ca9-90ff-0180acb44ce1",
+            "containerId": "",
+            "name": "Show category",
+            "url": "localhost:3333/categories/:id",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-07-31T19:08:16.313Z",
+            "modified": "2024-07-31T20:20:56.843Z",
+            "headers": []
+        },
+        {
+            "_id": "27fcfb28-69cd-491f-8da4-b5ebb5cd597e",
+            "colId": "5b18a6fe-2609-4ca9-90ff-0180acb44ce1",
+            "containerId": "",
+            "name": "Show categories",
+            "url": "localhost:3333/categories/",
+            "method": "GET",
+            "sortNum": 25000,
+            "created": "2024-08-15T15:05:24.232Z",
+            "modified": "2024-08-15T15:05:47.608Z",
+            "headers": []
+        },
+        {
+            "_id": "d588cf4a-94a5-441c-805f-cfc273d60518",
+            "colId": "5b18a6fe-2609-4ca9-90ff-0180acb44ce1",
+            "containerId": "",
+            "name": "Delete category",
+            "url": "localhost:3333/categories/:id",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2024-07-31T19:10:24.721Z",
+            "modified": "2024-07-31T20:21:07.283Z",
+            "headers": []
+        },
+        {
+            "_id": "923ccac3-620a-4038-b8aa-24c6b6148357",
+            "colId": "5b18a6fe-2609-4ca9-90ff-0180acb44ce1",
+            "containerId": "",
+            "name": "Update category",
+            "url": "localhost:3333/categories/:id",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-07-31T19:11:37.673Z",
+            "modified": "2024-07-31T20:21:13.665Z",
+            "headers": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Taladros"
+                    }
+                ]
+            }
+        }
+    ],
+    "ref": "uo2HuP6A4LAiSqSONXk89404X_pqNCUFkL2-_ZpMSDIbZBwZuj2g0XQud3qmPWADjGrKRtwnwkMzJDEwdPK18Q"
+}

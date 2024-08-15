@@ -5,22 +5,29 @@ import SaleDetail from 'App/Models/SaleDetail'
 import UnitConversionService from 'App/Service/UnitConversionService'
 import SaleValidator from 'App/Validators/SaleValidator'
 import Database from '@ioc:Adonis/Lucid/Database'
+import Currency from 'App/Models/Currency'
 
 export default class SalesController {
     public async finishSale({request, response}:HttpContextContract){
         let payload = await request.validate(SaleValidator)
         let product = await Product.findOrFail(payload.params.id)
-        let quantityDetail:number = -1
+        let currency = await Currency.findByOrFail("symbol", payload.currency_symbol)
         await product.load("meassure")
+        
+        if (product.stock  === 0 || payload.quantity > product.stock) {
 
-        quantityDetail = UnitConversionService.unitConvertion(payload.meassure, product.meassure.symbol, payload.quantity)
+            response.send("We ran out of that product")
+            
+        }
+
+        let quantityDetail = UnitConversionService.unitConvertion(payload.meassure, product.meassure.symbol, payload.quantity)
 
         response.abortIf(quantityDetail < 0, 
             "It wasn't possible to complete your sale because you request an invalid product quantity",
             400
         )
 
-        await Database.transaction(async (trx)=>{
+        const saleCompleted = await Database.transaction(async (trx)=>{
             const newSale = new Sale()
 
             newSale.operation_number=payload.operation_number
@@ -35,14 +42,24 @@ export default class SalesController {
             
                 sale_id:newSale.id,
                 product_id:product.id,
-                product_quantity:quantityDetail
+                product_quantity:quantityDetail,
+                subtotal:(product.price * currency.currentValue),
+                currency_symbol:payload.currency_symbol
 
             })
+
+            product.stock -= quantityDetail
+
+            product.save()
+
+            newSaleDetail.load("products")
+            newSaleDetail.load("sales")
 
             return newSaleDetail
 
         })
 
+        response.ok(saleCompleted)
 
     }
 }

@@ -1,0 +1,147 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Products",
+    "collectionId": "d558cd8f-4c6c-4c66-b783-ca04faf274be",
+    "dateExported": "2024-08-15T20:19:42.365Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "4067fdae-152c-4bf0-8742-7c491e148aa4",
+            "colId": "d558cd8f-4c6c-4c66-b783-ca04faf274be",
+            "containerId": "",
+            "name": "Create Product",
+            "url": "localhost:3333/products/",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-08-15T14:56:03.729Z",
+            "modified": "2024-08-15T15:48:09.587Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Clavos"
+                    },
+                    {
+                        "name": "code",
+                        "value": "56789"
+                    },
+                    {
+                        "name": "stock",
+                        "value": ""
+                    },
+                    {
+                        "name": "category",
+                        "value": ""
+                    },
+                    {
+                        "name": "meassure",
+                        "value": ""
+                    },
+                    {
+                        "name": "price",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "52422d5d-261e-403c-a47c-2b4e8ef3cade",
+            "colId": "d558cd8f-4c6c-4c66-b783-ca04faf274be",
+            "containerId": "",
+            "name": "Show Product",
+            "url": "localhost:3333/products/:id",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-08-15T14:56:03.730Z",
+            "modified": "2024-08-15T15:00:42.965Z",
+            "headers": []
+        },
+        {
+            "_id": "38852fa1-e36c-4d4b-9588-d4b57df110a0",
+            "colId": "d558cd8f-4c6c-4c66-b783-ca04faf274be",
+            "containerId": "",
+            "name": "Update Product",
+            "url": "localhost:3333/products/:id",
+            "method": "PUT",
+            "sortNum": 20000,
+            "created": "2024-08-15T15:01:46.225Z",
+            "modified": "2024-08-15T15:02:15.846Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": ""
+                    },
+                    {
+                        "name": "code",
+                        "value": ""
+                    },
+                    {
+                        "name": "price",
+                        "value": ""
+                    },
+                    {
+                        "name": "stock",
+                        "value": ""
+                    },
+                    {
+                        "name": "category",
+                        "value": ""
+                    },
+                    {
+                        "name": "meassure",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "ca78da8a-5021-4541-a3b6-1c8cd2615100",
+            "colId": "d558cd8f-4c6c-4c66-b783-ca04faf274be",
+            "containerId": "",
+            "name": "Show Products",
+            "url": "localhost:3333/products/",
+            "method": "GET",
+            "sortNum": 25000,
+            "created": "2024-08-15T15:06:39.489Z",
+            "modified": "2024-08-15T15:06:58.302Z",
+            "headers": []
+        },
+        {
+            "_id": "833ec8c4-86f7-45f8-9c90-aa75db95fc96",
+            "colId": "d558cd8f-4c6c-4c66-b783-ca04faf274be",
+            "containerId": "",
+            "name": "Delete Product",
+            "url": "localhost:3333/categories/:id",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2024-08-15T14:56:03.731Z",
+            "modified": "2024-08-15T14:56:03.731Z",
+            "headers": []
+        }
+    ],
+    "ref": "x974Z-JyPKcoz13KmDNegVE9kOry2mg97C0EcPHqlSm1t-uXdCNDWG6F_3Kd0RUy8vZxe7IwBLkPa-fCu1bNKQ"
+}

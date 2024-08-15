@@ -9,6 +9,8 @@ export default class extends BaseSchema {
       table.integer("sale_id").unsigned().references("id").inTable("sales").onDelete("CASCADE").notNullable()
       table.integer("product_id").unsigned().references("id").inTable("products").onDelete("CASCADE").notNullable()
       table.float("product_quantity", 9, 2).notNullable()
+      table.float("subtotal", 9, 2)
+      table.string("currency_symbol", 5)
     })
   }
 

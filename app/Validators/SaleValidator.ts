@@ -48,6 +48,9 @@ export default class SaleValidator {
     ]),
     receptor_bank:schema.number([
       rules.exists({table:"banks", column:"id"})
+    ]),
+    currency_symbol:schema.string([
+      rules.exists({table:"currencies", column:"symbol"})
     ])
   })
 

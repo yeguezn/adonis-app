@@ -1,0 +1,65 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Sales",
+    "collectionId": "416235d1-7ffd-418e-817d-a66fe523d22e",
+    "dateExported": "2024-08-15T20:20:29.921Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "4709fbda-c863-4924-ae10-972c62451944",
+            "colId": "416235d1-7ffd-418e-817d-a66fe523d22e",
+            "containerId": "",
+            "name": "Finish Sale",
+            "url": "localhost:3333/sales/",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-08-15T15:17:23.792Z",
+            "modified": "2024-08-15T15:35:35.965Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "operation_number",
+                        "value": ""
+                    },
+                    {
+                        "name": "person_bank",
+                        "value": ""
+                    },
+                    {
+                        "name": "person",
+                        "value": ""
+                    },
+                    {
+                        "name": "receptor_bank",
+                        "value": ""
+                    },
+                    {
+                        "name": "meassure",
+                        "value": ""
+                    },
+                    {
+                        "name": "product",
+                        "value": ""
+                    },
+                    {
+                        "name": "quantity",
+                        "value": ""
+                    }
+                ]
+            }
+        }
+    ],
+    "ref": "w1nQo1Y5iIZhBZkHmDSo_qRnkLxHKGwyOdd97kf8gS-SC3dwB2jH-yQrYTC0bR6-qciB1r7IdCrvnLu7LyXYcw"
+}

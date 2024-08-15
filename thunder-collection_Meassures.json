@@ -1,0 +1,107 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Meassures",
+    "collectionId": "7259b336-12b5-4a04-a7be-abe5bebd01d9",
+    "dateExported": "2024-08-15T20:19:34.749Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "01168854-37cf-43b4-ae53-d80276d72c4b",
+            "colId": "7259b336-12b5-4a04-a7be-abe5bebd01d9",
+            "containerId": "",
+            "name": "Create Meassure",
+            "url": "localhost:3333/meassures/",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-07-31T20:17:08.614Z",
+            "modified": "2024-08-01T15:29:58.902Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Unidad"
+                    },
+                    {
+                        "name": "symbol",
+                        "value": "unidad"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "88ed2625-f1cf-409e-ae12-77167e31b499",
+            "colId": "7259b336-12b5-4a04-a7be-abe5bebd01d9",
+            "containerId": "",
+            "name": "Show meassure",
+            "url": "localhost:3333/meassures/:id",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-07-31T20:17:08.615Z",
+            "modified": "2024-07-31T20:18:50.821Z",
+            "headers": []
+        },
+        {
+            "_id": "c8077e39-8e93-4554-9830-d0a255de42f4",
+            "colId": "7259b336-12b5-4a04-a7be-abe5bebd01d9",
+            "containerId": "",
+            "name": "Show meassures",
+            "url": "localhost:3333/meassures/",
+            "method": "GET",
+            "sortNum": 25000,
+            "created": "2024-08-15T15:06:08.393Z",
+            "modified": "2024-08-15T15:06:26.040Z",
+            "headers": []
+        },
+        {
+            "_id": "de9446ff-2d6f-47af-a4f7-379b2a661ce2",
+            "colId": "7259b336-12b5-4a04-a7be-abe5bebd01d9",
+            "containerId": "",
+            "name": "Delete meassure",
+            "url": "localhost:3333/categories/:id",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2024-07-31T20:17:08.616Z",
+            "modified": "2024-07-31T20:20:09.810Z",
+            "headers": []
+        },
+        {
+            "_id": "ef700a1a-ea71-48b4-9fa6-de74f2d3326f",
+            "colId": "7259b336-12b5-4a04-a7be-abe5bebd01d9",
+            "containerId": "",
+            "name": "Update category",
+            "url": "localhost:3333/categories/:id",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-07-31T20:17:08.617Z",
+            "modified": "2024-07-31T20:20:35.042Z",
+            "headers": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": ""
+                    },
+                    {
+                        "name": "symbol",
+                        "value": ""
+                    }
+                ]
+            }
+        }
+    ],
+    "ref": "XqZtLmbX_taGB7SVxSQ8DZpc3rAnbb4bqTrPeLVBNenPa8_G2ytbLj1zhML4aOoBd8h-O5a2cEkyyYh4yF9seA"
+}

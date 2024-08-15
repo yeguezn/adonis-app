@@ -1,0 +1,123 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Currencies",
+    "collectionId": "6ac58f43-1200-48e1-a30d-3bb0faf34dd4",
+    "dateExported": "2024-08-15T20:20:21.761Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "204ef001-55bc-41e7-9a89-178265d090d6",
+            "colId": "6ac58f43-1200-48e1-a30d-3bb0faf34dd4",
+            "containerId": "",
+            "name": "Create Currency",
+            "url": "localhost:3333/currencies/",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-08-15T15:07:47.774Z",
+            "modified": "2024-08-15T15:11:17.445Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": ""
+                    },
+                    {
+                        "name": "current_value",
+                        "value": ""
+                    },
+                    {
+                        "name": "symbol",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "fdf53617-2413-4a8d-a8e4-4ec6dc5fa060",
+            "colId": "6ac58f43-1200-48e1-a30d-3bb0faf34dd4",
+            "containerId": "",
+            "name": "Show Currency",
+            "url": "localhost:3333/currencies/:id",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-08-15T15:07:47.775Z",
+            "modified": "2024-08-15T15:11:58.745Z",
+            "headers": []
+        },
+        {
+            "_id": "8cc73dad-cd16-469c-a4a1-bd5212c5f268",
+            "colId": "6ac58f43-1200-48e1-a30d-3bb0faf34dd4",
+            "containerId": "",
+            "name": "Update Currency",
+            "url": "localhost:3333/currencies/:id",
+            "method": "PUT",
+            "sortNum": 20000,
+            "created": "2024-08-15T15:12:21.585Z",
+            "modified": "2024-08-15T15:12:39.595Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": ""
+                    },
+                    {
+                        "name": "current_value",
+                        "value": ""
+                    },
+                    {
+                        "name": "symbol",
+                        "value": ""
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "ca00a1b8-a615-4eb0-b425-09794a14be94",
+            "colId": "6ac58f43-1200-48e1-a30d-3bb0faf34dd4",
+            "containerId": "",
+            "name": "Show Currencies",
+            "url": "localhost:3333/products/",
+            "method": "GET",
+            "sortNum": 25000,
+            "created": "2024-08-15T15:07:47.777Z",
+            "modified": "2024-08-15T15:07:47.777Z",
+            "headers": []
+        },
+        {
+            "_id": "22af9379-19b9-4a8c-92b7-95ce002d7059",
+            "colId": "6ac58f43-1200-48e1-a30d-3bb0faf34dd4",
+            "containerId": "",
+            "name": "Delete Currency",
+            "url": "localhost:3333/currencies/:id",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2024-08-15T15:07:47.778Z",
+            "modified": "2024-08-15T15:15:06.317Z",
+            "headers": []
+        }
+    ],
+    "ref": "52FjsCBHNt05rLECayXdmiVyutnsLRC5Z7DyF4KaD0uT1DixMdfjwX9fRO2nYwRSERGaQWjYHF_NvTiWXiky6g"
+}
