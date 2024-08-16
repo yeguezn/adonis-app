@@ -9,7 +9,7 @@ export default class Bank extends BaseModel {
   public name: string
 
   @column()
-  public account_number: string
+  public accountNumber: string
 
   @hasMany(()=> Sale)
   public sales: HasMany<typeof Sale>

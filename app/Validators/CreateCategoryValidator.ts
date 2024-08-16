@@ -25,7 +25,6 @@ export default class CreateCategoryValidator {
    */
   public schema = schema.create({
     name:schema.string([
-      rules.minLength(5),
       rules.maxLength(30)
     ])
   })

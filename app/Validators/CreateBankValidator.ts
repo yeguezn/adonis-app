@@ -27,7 +27,7 @@ export default class CreateBankValidator {
     name:schema.string([
       rules.maxLength(255)
     ]),
-    account_number:schema.string([
+    accountNumber:schema.string([
       rules.minLength(20), 
       rules.maxLength(20) 
     ])

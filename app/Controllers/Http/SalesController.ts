@@ -13,12 +13,6 @@ export default class SalesController {
         let product = await Product.findOrFail(payload.params.id)
         let currency = await Currency.findByOrFail("symbol", payload.currency_symbol)
         await product.load("meassure")
-        
-        if (product.stock  === 0 || payload.quantity > product.stock) {
-
-            response.send("We ran out of that product")
-            
-        }
 
         let quantityDetail = UnitConversionService.unitConvertion(payload.meassure, product.meassure.symbol, payload.quantity)
 
@@ -26,6 +20,12 @@ export default class SalesController {
             "It wasn't possible to complete your sale because you request an invalid product quantity",
             400
         )
+
+        if (product.stock  === 0 || (product.stock - quantityDetail) < 0) {
+
+            response.send("We ran out of that product")
+            
+        }
 
         const saleCompleted = await Database.transaction(async (trx)=>{
             const newSale = new Sale()

@@ -1,45 +1,45 @@
-// import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Bank from "App/Models/Bank"
 import BankValidator from "App/Validators/BankValidator"
 import CreateBankValidator from "App/Validators/CreateBankValidator"
-import UpdatePersonValidator from "App/Validators/UpdatePersonValidator"
+import UpdateBankValidator from "App/Validators/UpdateBankValidator"
 
 export default class BanksController {
-  public async index({response}){
+  public async index({response}:HttpContextContract){
     let banks = await Bank.all()
     response.ok(banks)
   }
 
-  public async show({request, response}){
+  public async show({request, response}:HttpContextContract){
     let payload = await request.validate(BankValidator)
     let bank = await Bank.find(payload.params.id)
     response.ok(bank)
   }
 
-  public async store({request, response}){
-    let payload = request.validate(CreateBankValidator)
+  public async store({request, response}:HttpContextContract){
+    let payload = await request.validate(CreateBankValidator)
     let newCurrency = await Bank.create({
       name:payload.name,
-      account_number:payload.account_number
+      accountNumber:payload.accountNumber
     })
 
     response.ok(newCurrency)
 	}
 
-  public async update({request, response}){
-		let payload = await request.validate(UpdatePersonValidator)
+  public async update({request, response}:HttpContextContract){
+		let payload = await request.validate(UpdateBankValidator)
     let bank = await Bank.findOrFail(payload.params.id)
 
-		bank.name = request.body().name
-    bank.account_number = request.body().account_number
+		bank.name = payload.name
+    bank.accountNumber = payload.accountNumber
     await bank.save()
 			
     response.ok(bank)
 
   }
 
-  public async destroy({request, response}){
+  public async destroy({request, response}:HttpContextContract){
 		let payload = await request.validate(BankValidator)
     let bank = await Bank.findOrFail(payload.params.id)
     await bank.delete()

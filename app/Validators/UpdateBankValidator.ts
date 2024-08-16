@@ -28,7 +28,15 @@ export default class UpdateBankValidator {
       id:schema.number([
         rules.exists({table:"banks", column:"id"})
       ])
-    })
+    }),
+
+    name:schema.string([
+      rules.maxLength(255)
+    ]),
+
+    accountNumber:schema.string([
+      rules.maxLength(10)
+    ])
   })
 
   /**
