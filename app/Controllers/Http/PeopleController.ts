@@ -22,7 +22,7 @@ export default class PeopleController {
 
       let newPerson = await Person.create({
         name:payload.name,
-        identity_document:payload.identity_document,
+        identity_document:payload.identityDocument,
         email:payload.email,
         birthday:payload.birthday
 
@@ -37,7 +37,7 @@ export default class PeopleController {
         let person = await Person.findOrFail(payload.params.id)
 
         person.name = payload.name
-        person.identity_document=payload.identity_document
+        person.identity_document=payload.identityDocument
         person.email=payload.email
         person.birthday=payload.birthday
 

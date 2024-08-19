@@ -37,19 +37,20 @@ export default class SaleValidator {
     quantity:schema.number([
       rules.range(0.1, 100000)
     ]),
-    operation_number:schema.string([
-      rules.minLength(10)
+    operationNumber:schema.string([
+      rules.minLength(10),
+      rules.unique({table:"sales", column:"operation_number"})
     ]),
-    person_bank:schema.string([
+    personBank:schema.string([
       rules.maxLength(255)
     ]),
     person:schema.number([
       rules.exists({table:"people", column:"id"})
     ]),
-    receptor_bank:schema.number([
+    receptorBank:schema.number([
       rules.exists({table:"banks", column:"id"})
     ]),
-    currency_symbol:schema.string([
+    currencySymbol:schema.string([
       rules.exists({table:"currencies", column:"symbol"})
     ])
   })

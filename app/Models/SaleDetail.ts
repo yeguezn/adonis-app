@@ -12,10 +12,14 @@ export default class SaleDetail extends BaseModel {
   @column()
   public product_id:number
 
-  @belongsTo(()=> Sale)
+  @belongsTo(()=> Sale, {
+    foreignKey:"sale_id"
+  })
   public sales: BelongsTo<typeof Sale>
 
-  @belongsTo(()=> Product)
+  @belongsTo(()=> Product, {
+    foreignKey:"product_id"
+  })
   public products: BelongsTo<typeof Product>
 
   @column()

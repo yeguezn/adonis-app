@@ -28,5 +28,5 @@ Route.resource("banks", "BanksController").apiOnly()
 Route.resource("currencies", "CurrenciesController").apiOnly()
 
 
-Route.post("sales", "SalesController.finishSale")
+Route.post("/sales/:id", "SalesController.finishSale")
 Route.get("/productsByCategory/:id", "ProductsController.filterProductsByCategory")

@@ -25,10 +25,9 @@ export default class CreatePersonValidator {
    */
   public schema = schema.create({
     name:schema.string([
-      rules.minLength(10),
       rules.maxLength(50)
     ]),
-    identity_document:schema.string([
+    identityDocument:schema.string([
       rules.maxLength(8),
       rules.minLength(7),
       rules.regex(/^[0-9]{7,8}$/),

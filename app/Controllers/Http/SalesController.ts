@@ -11,53 +11,51 @@ export default class SalesController {
     public async finishSale({request, response}:HttpContextContract){
         let payload = await request.validate(SaleValidator)
         let product = await Product.findOrFail(payload.params.id)
-        let currency = await Currency.findByOrFail("symbol", payload.currency_symbol)
+        let currency = await Currency.findByOrFail("symbol", payload.currencySymbol)
+        let quantityDetail:number = -1
         await product.load("meassure")
 
-        let quantityDetail = UnitConversionService.unitConvertion(payload.meassure, product.meassure.symbol, payload.quantity)
+        if (product.meassure.name === "unit") {
 
-        response.abortIf(quantityDetail < 0, 
+            quantityDetail = Math.trunc(payload.quantity)
+            
+        }else{
+
+            quantityDetail = UnitConversionService.unitConvertion(payload.meassure, product.meassure.symbol, payload.quantity)
+
+        }
+
+        response.abortIf(quantityDetail < 0 || (product.stock - quantityDetail) < 0, 
             "It wasn't possible to complete your sale because you request an invalid product quantity",
             400
         )
 
-        if (product.stock  === 0 || (product.stock - quantityDetail) < 0) {
-
-            response.send("We ran out of that product")
-            
-        }
-
         const saleCompleted = await Database.transaction(async (trx)=>{
-            const newSale = new Sale()
+            const newSale = await Sale.create({
+                operation_number:payload.operationNumber,
+                person_bank:payload.personBank,
+                person_id:payload.person,
+                bank_id:payload.receptorBank
+            }, {client:trx})
 
-            newSale.operation_number=payload.operation_number
-            newSale.person_bank=payload.person_bank
-            newSale.person_id=payload.person
-            newSale.bank_id=payload.receptor_bank
-
-            newSale.useTransaction(trx)
-            newSale.save()
-
+           
             const newSaleDetail = await SaleDetail.create({
             
                 sale_id:newSale.id,
                 product_id:product.id,
                 product_quantity:quantityDetail,
-                subtotal:(product.price * currency.currentValue),
-                currency_symbol:payload.currency_symbol
+                subtotal:Math.round(product.price * currency.currentValue),
+                currency_symbol:payload.currencySymbol
 
-            })
+            }, {client:trx})
 
             product.stock -= quantityDetail
-
             product.save()
-
-            newSaleDetail.load("products")
-            newSaleDetail.load("sales")
 
             return newSaleDetail
 
         })
+
 
         response.ok(saleCompleted)
 
