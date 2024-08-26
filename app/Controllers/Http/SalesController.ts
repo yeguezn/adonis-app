@@ -8,12 +8,14 @@ import Database from '@ioc:Adonis/Lucid/Database'
 import Currency from 'App/Models/Currency'
 
 export default class SalesController {
-    public async finishSale({request, response}:HttpContextContract){
+    public async finishSale({request, response, auth, bouncer}:HttpContextContract){
         let payload = await request.validate(SaleValidator)
         let product = await Product.findOrFail(payload.params.id)
         let currency = await Currency.findByOrFail("symbol", payload.currencySymbol)
         let quantityDetail:number = -1
         await product.load("meassure")
+
+        await bouncer.authorize("manageResourceAsClient")
 
         if (product.meassure.name === "unit") {
 
@@ -25,7 +27,7 @@ export default class SalesController {
 
         }
 
-        response.abortIf(quantityDetail < 0 || (product.stock - quantityDetail) < 0, 
+        response.abortIf(quantityDetail <= 0 || (product.stock - quantityDetail) < 0, 
             "It wasn't possible to complete your sale because you request an invalid product quantity",
             400
         )
@@ -34,7 +36,7 @@ export default class SalesController {
             const newSale = await Sale.create({
                 operation_number:payload.operationNumber,
                 person_bank:payload.personBank,
-                person_id:payload.person,
+                person_id:auth.user.id,
                 bank_id:payload.receptorBank
             }, {client:trx})
 

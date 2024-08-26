@@ -24,7 +24,8 @@ export default class PeopleController {
         name:payload.name,
         identity_document:payload.identityDocument,
         email:payload.email,
-        birthday:payload.birthday
+        birthday:payload.birthday,
+        password:payload.password
 
       })
 

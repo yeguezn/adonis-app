@@ -1,7 +1,7 @@
 import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class CreatePersonValidator {
+export default class AuthValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   /*
@@ -24,27 +24,13 @@ export default class CreatePersonValidator {
    *    ```
    */
   public schema = schema.create({
-    name:schema.string([
-      rules.maxLength(50)
-    ]),
-    identityDocument:schema.string([
-      rules.maxLength(8),
-      rules.minLength(7),
-      rules.regex(/^[0-9]{7,8}$/),
-      rules.unique({table:"people", column:"identity_document"})
-    ]),
     email:schema.string([
-      rules.maxLength(255),
-      rules.email(),
-      rules.unique({table:"people", column:"email"})
+      rules.email()
     ]),
-    birthday:schema.date({format:"dd-MM-yyyy"}, [
-      rules.before(18, "years")
-    ]),
+
     password:schema.string([
       rules.maxLength(8)
     ])
-    
   })
 
   /**

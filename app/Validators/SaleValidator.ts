@@ -44,9 +44,6 @@ export default class SaleValidator {
     personBank:schema.string([
       rules.maxLength(255)
     ]),
-    person:schema.number([
-      rules.exists({table:"people", column:"id"})
-    ]),
     receptorBank:schema.number([
       rules.exists({table:"banks", column:"id"})
     ]),
