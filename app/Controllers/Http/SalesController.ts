@@ -36,7 +36,7 @@ export default class SalesController {
             const newSale = await Sale.create({
                 operation_number:payload.operationNumber,
                 person_bank:payload.personBank,
-                person_id:auth.user.id,
+                person_id:auth.user?.id,
                 bank_id:payload.receptorBank
             }, {client:trx})
 

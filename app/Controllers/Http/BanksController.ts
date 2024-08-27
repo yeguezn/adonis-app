@@ -17,8 +17,9 @@ export default class BanksController {
     response.ok(bank)
   }
 
-  public async store({request, response}:HttpContextContract){
+  public async store({request, response, bouncer}:HttpContextContract){
     let payload = await request.validate(CreateBankValidator)
+    await bouncer.authorize("manageResourceAsAdmin")
     let newCurrency = await Bank.create({
       name:payload.name,
       accountNumber:payload.accountNumber
@@ -27,10 +28,10 @@ export default class BanksController {
     response.ok(newCurrency)
 	}
 
-  public async update({request, response}:HttpContextContract){
+  public async update({request, response, bouncer}:HttpContextContract){
 		let payload = await request.validate(UpdateBankValidator)
     let bank = await Bank.findOrFail(payload.params.id)
-
+    await bouncer.authorize("manageResourceAsAdmin")
 		bank.name = payload.name
     bank.accountNumber = payload.accountNumber
     await bank.save()
@@ -39,9 +40,11 @@ export default class BanksController {
 
   }
 
-  public async destroy({request, response}:HttpContextContract){
+  public async destroy({request, response, bouncer}:HttpContextContract){
 		let payload = await request.validate(BankValidator)
     let bank = await Bank.findOrFail(payload.params.id)
+    await bouncer.authorize("manageResourceAsAdmin")
+
     await bank.delete()
     response.ok(bank)
   }

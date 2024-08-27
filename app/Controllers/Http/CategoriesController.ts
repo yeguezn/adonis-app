@@ -17,8 +17,9 @@ export default class CategoriesController {
     response.ok(category)
   }
 
-  public async store({request, response}:HttpContextContract){
+  public async store({request, response, bouncer}:HttpContextContract){
     let payload = await request.validate(CreateCategoryValidator)
+    await bouncer.authorize("manageResourceAsAdmin")
     let newCategory = await Category.create({
       name:payload.name
     })
@@ -26,9 +27,10 @@ export default class CategoriesController {
     response.ok(newCategory)
   }
 
-  public async update({request, response}:HttpContextContract){
+  public async update({request, response, bouncer}:HttpContextContract){
     let payload = await request.validate(UpdateCategoryValidator)
     let category = await Category.findOrFail(payload.params.id)
+    await bouncer.authorize("manageResourceAsAdmin")
     category.name = request.body().name
     await category.save()
 
@@ -36,9 +38,10 @@ export default class CategoriesController {
 
   }
 
-  public async destroy({request, response}:HttpContextContract){
+  public async destroy({request, response, bouncer}:HttpContextContract){
     let payload = await request.validate(CategoryValidator)
     let category = await Category.findOrFail(payload.params.id)
+    await bouncer.authorize("manageResourceAsAdmin")
     await category.delete()
     response.ok(category)
   }

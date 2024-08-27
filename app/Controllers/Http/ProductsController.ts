@@ -7,16 +7,16 @@ import UpdateProductValidator from 'App/Validators/UpdateProductValidator';
 
 export default class ProductsController {
     public async index({response}: HttpContextContract){
-       const products = await Product.query().preload("category").preload("meassure")
+       let products = await Product.query().preload("category").preload("meassure")
 
         response.ok(products)
     }
 
     public async show({request, response}){
 
-        const payload = await request.validate(ProductValidator)
+        let payload = await request.validate(ProductValidator)
 
-        const product = await Product.find(payload.params.id)
+        let product = await Product.find(payload.params.id)
 
         await product?.load("category")
         await product?.load("meassure")
@@ -25,10 +25,11 @@ export default class ProductsController {
         response.ok(product)
     }
 
-    public async store({request, response}:HttpContextContract){
-      const payload = await request.validate(CreateProductValidator)
+    public async store({request, response, bouncer}:HttpContextContract){
+      let payload = await request.validate(CreateProductValidator)
+      await bouncer.authorize("manageResourceAsAdmin")
 
-      const newProduct = await Product.create({
+      let newProduct = await Product.create({
 
         code:payload.code,
         name:payload.name,
@@ -43,9 +44,10 @@ export default class ProductsController {
       response.ok(newProduct)
     }
 
-    public async update({request, response}){
-        const payload = await request.validate(UpdateProductValidator)
-        const product = await Product.findOrFail(payload.params.id)
+    public async update({request, response, bouncer}){
+        let payload = await request.validate(UpdateProductValidator)
+        let product = await Product.findOrFail(payload.params.id)
+        await bouncer.authorize("manageResourceAsAdmin")
 
         product.name = payload.name
         product.code = payload.code
@@ -59,18 +61,20 @@ export default class ProductsController {
 
     }
 
-    public async destroy({request, response}){
-        const payload = await request.validate(ProductValidator)
-        const product = await Product.findOrFail(payload.params.id)
+    public async destroy({request, response, bouncer}){
+        let payload = await request.validate(ProductValidator)
+        let product = await Product.findOrFail(payload.params.id)
+        await bouncer.authorize("manageResourceAsAdmin")
         await product.delete()
         response.ok(product)
     }
 
-    public async filterProductsByCategory({request, response}:HttpContextContract){
-        const payload = await request.validate(CategoryValidator)
-        const products = await Product.query().whereHas("category", (query)=>{
+    public async filterProductsByCategory({request, response, bouncer}:HttpContextContract){
+        let payload = await request.validate(CategoryValidator)
+        let products = await Product.query().whereHas("category", (query)=>{
             query.where("id", payload.params.id)
         })
+        await bouncer.authorize("manageResourceAsAdmin")
 
         response.ok(products)
         

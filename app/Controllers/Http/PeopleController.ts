@@ -5,14 +5,16 @@ import UpdatePersonValidator from 'App/Validators/UpdatePersonValidator'
 import PersonValidator from 'App/Validators/PersonValidator'
 
 export default class PeopleController {
-    public async index({response}:HttpContextContract){
+    public async index({response, bouncer}:HttpContextContract){
         let people = await Person.all()
+        await bouncer.authorize("manageResourceAsAdmin")
         response.ok(people)
     }
 
-    public async show({request, response}:HttpContextContract){
+    public async show({request, response, bouncer}:HttpContextContract){
         let payload = await request.validate(PersonValidator)
         let person = await Person.find(payload.params.id)
+        await bouncer.authorize("manageResourceAsAdmin")
 
         response.ok(person)
     }
@@ -32,10 +34,11 @@ export default class PeopleController {
       response.ok(newPerson)
     }
 
-    public async update({request, response}:HttpContextContract){
+    public async update({request, response, bouncer}:HttpContextContract){
 
         let payload = await request.validate(UpdatePersonValidator)
         let person = await Person.findOrFail(payload.params.id)
+        await bouncer.authorize("manageResourceAsAdmin")
 
         person.name = payload.name
         person.identity_document=payload.identityDocument
@@ -47,9 +50,10 @@ export default class PeopleController {
 
     }
 
-    public async destroy({request, response}:HttpContextContract){
+    public async destroy({request, response, bouncer}:HttpContextContract){
         let payload = await request.validate(PersonValidator)
         let person = await Person.findOrFail(payload.params.id)
+        await bouncer.authorize("manageResourceAsAdmin")
         await person.delete()
         response.ok(person)
     }
