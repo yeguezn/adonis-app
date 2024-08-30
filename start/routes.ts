@@ -22,8 +22,8 @@ import Route from '@ioc:Adonis/Core/Route'
 
 
 Route.group(()=>{
-    Route.get("/products", "ProductsController.index").middleware("auth")
-    Route.get("/products/:id", "ProductsController.show").middleware("auth")
+    Route.get("/products", "ProductsController.index")
+    Route.get("/products/:id", "ProductsController.show")
     Route.post("/products", "ProductsController.store").middleware("auth")
     Route.put("/products/:id", "ProductsController.update").middleware("auth")
     Route.delete("/products/:id", "ProductsController.delete").middleware("auth")
@@ -51,22 +51,22 @@ Route.group(()=>{
 })
 
 Route.group(()=>{
-    Route.get("/currencies", "CurrenciesController.index").middleware("auth")
-    Route.get("/currencies/:id", "CurrenciesController.show").middleware("auth")
-    Route.post("/currencies", "CurrenciesController.store").middleware("auth")
-    Route.put("/currencies/:id", "CurrenciesController.update").middleware("auth")
-    Route.delete("/currencies/:id", "CurrenciesController.delete").middleware("auth")
-})
+    Route.get("/currencies", "CurrenciesController.index")
+    Route.get("/currencies/:id", "CurrenciesController.show")
+    Route.post("/currencies", "CurrenciesController.store")
+    Route.put("/currencies/:id", "CurrenciesController.update")
+    Route.delete("/currencies/:id", "CurrenciesController.delete")
+}).middleware("auth")
 
 Route.group(()=>{
-    Route.get("/categories", "CategoriesController.index").middleware("auth")
-    Route.get("/categories/:id", "CategoriesController.show").middleware("auth")
+    Route.get("/categories", "CategoriesController.index")
+    Route.get("/categories/:id", "CategoriesController.show")
     Route.post("/categories", "CategoriesController.store").middleware("auth")
     Route.put("/categories/:id", "CategoriesController.update").middleware("auth")
     Route.delete("/categories/:id", "CategoriesController.delete").middleware("auth")
 })
 
 Route.post("/sales/:id", "SalesController.finishSale").middleware("auth")
-Route.get("/productsByCategory/:id", "ProductsController.filterProductsByCategory").middleware("auth")
+Route.get("/productsByCategory/:id", "ProductsController.filterProductsByCategory")
 Route.post("/login", "AuthController.login")
 Route.post("/logout", "AuthController.logout")

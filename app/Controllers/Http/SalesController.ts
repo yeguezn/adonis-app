@@ -8,6 +8,13 @@ import Database from '@ioc:Adonis/Lucid/Database'
 import Currency from 'App/Models/Currency'
 
 export default class SalesController {
+
+    private isFloat(quantity:number){
+
+        return quantity.toString().includes(".")
+
+    }
+
     public async finishSale({request, response, auth, bouncer}:HttpContextContract){
         let payload = await request.validate(SaleValidator)
         let product = await Product.findOrFail(payload.params.id)
@@ -17,19 +24,19 @@ export default class SalesController {
 
         await bouncer.authorize("manageResourceAsClient")
 
-        if (product.meassure.name === "unit") {
+        if (product.meassure.name === "unit" && this.isFloat(payload.quantity)) 
+        {
 
-            quantityDetail = Math.trunc(payload.quantity)
+           response.status(422)
+           .send("It wasn't possible to complete your sale because you request an invalid product quantity")
             
         }else{
-
             quantityDetail = UnitConversionService.unitConvertion(payload.meassure, product.meassure.symbol, payload.quantity)
-
         }
 
         response.abortIf(quantityDetail <= 0 || (product.stock - quantityDetail) < 0, 
             "It wasn't possible to complete your sale because you request an invalid product quantity",
-            400
+            422
         )
 
         const saleCompleted = await Database.transaction(async (trx)=>{
