@@ -42,5 +42,5 @@ export default class BankValidator {
    * }
    *
    */
-  public messages: CustomMessages = {}
+  public messages = this.ctx.i18n.validatorMessages('validator.contact')
 }

@@ -27,7 +27,7 @@ Route.group(()=>{
     Route.post("/products", "ProductsController.store").middleware("auth")
     Route.put("/products/:id", "ProductsController.update").middleware("auth")
     Route.delete("/products/:id", "ProductsController.delete").middleware("auth")
-})
+}).middleware("DetectUserLocale")
 
 Route.group(()=>{
     Route.get("/meassures", "MeassuresController.index").middleware("auth")
@@ -64,7 +64,7 @@ Route.group(()=>{
     Route.post("/categories", "CategoriesController.store").middleware("auth")
     Route.put("/categories/:id", "CategoriesController.update").middleware("auth")
     Route.delete("/categories/:id", "CategoriesController.delete").middleware("auth")
-})
+}).middleware("DetectUserLocale")
 
 Route.post("/sales/:id", "SalesController.finishSale").middleware("auth")
 Route.get("/productsByCategory/:id", "ProductsController.filterProductsByCategory")

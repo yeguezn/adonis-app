@@ -1,0 +1,9 @@
+{
+    "shared": {
+      "required": "Este campo es requerido",
+      "unique": "Este correo electrónico ya está registrado",
+      "maxLength": "Este campo debe tener { maxLength } caractéres",
+      "exists":"No existe el recurso que está buscando"
+    }
+}
+  

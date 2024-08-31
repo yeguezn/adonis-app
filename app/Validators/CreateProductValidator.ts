@@ -25,18 +25,21 @@ export default class CreateProductValidator {
    */
   public schema = schema.create({
     code:schema.string([
-      rules.minLength(5),
-      rules.maxLength(5)
+      rules.maxLength(5),
+      rules.exists({table:"products", column:"code"})
     ]),
     
-    name:schema.string(),
+    name:schema.string([
+      rules.maxLength(20)
+    ]),
     
     stock:schema.number([
       rules.unsigned(),
       rules.range(1, 100000)
     ]),
     price:schema.number([
-      rules.unsigned()
+      rules.unsigned(),
+      rules.range(1, 100000)
     ]),
     category:schema.number([
       rules.unsigned(),
@@ -59,5 +62,5 @@ export default class CreateProductValidator {
    * }
    *
    */
-  public messages: CustomMessages = {}
+  public messages = this.ctx.i18n.validatorMessages('validator.contact')
 }

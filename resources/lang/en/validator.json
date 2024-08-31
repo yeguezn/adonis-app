@@ -1,0 +1,9 @@
+{
+    "shared": {
+      "required": "The value for the field is required",
+      "unique": "Email is already in use",
+      "minLengt": "The field must have { minLength } items",
+      "exists":"The resource you are seeking it doesn't exist"
+    }
+}
+  

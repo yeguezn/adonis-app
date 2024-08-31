@@ -19,7 +19,7 @@ export default class SalesController {
         let payload = await request.validate(SaleValidator)
         let product = await Product.findOrFail(payload.params.id)
         let currency = await Currency.findByOrFail("symbol", payload.currencySymbol)
-        let quantityDetail:number = -1
+        let quantityDetail:number
         await product.load("meassure")
 
         await bouncer.authorize("manageResourceAsClient")
@@ -27,8 +27,7 @@ export default class SalesController {
         if (product.meassure.name === "unit" && this.isFloat(payload.quantity)) 
         {
 
-           response.status(422)
-           .send("It wasn't possible to complete your sale because you request an invalid product quantity")
+           quantityDetail = -1
             
         }else{
             quantityDetail = UnitConversionService.unitConvertion(payload.meassure, product.meassure.symbol, payload.quantity)

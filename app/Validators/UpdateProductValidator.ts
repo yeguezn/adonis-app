@@ -67,5 +67,5 @@ export default class UpdateProductValidator {
    * }
    *
    */
-  public messages: CustomMessages = {}
+  public messages = this.ctx.i18n.validatorMessages('validator.contact')
 }
